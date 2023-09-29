@@ -9,14 +9,15 @@ import Modal from "./Modal/Modal";
 
 export function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadMore, setIsLoadMore] = useState(false);
+  const [, setIsLoadMore] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [largeImage, setLargeImage] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [images, setImages] = useState([]);
-  const [perPage, setPerPage] = useState(12);
   const [page, setPage] = useState(1)
   const [totalHits, setTotalHits] = useState(0);
+
+  const perPage = 12;
 
   useEffect(() => {
     if(!inputValue) return;
@@ -30,12 +31,12 @@ export function App() {
         console.log(data.totalHits)
 
         setImages((prevImages) => [...prevImages, ...data.hits]);
-        setTotalHits(data);
+        setTotalHits(data.totalHits);
 
         if( data.totalHits > perPage){
           setIsLoadMore(true)
               }else{
-                setIsLoadMore(false)
+          setIsLoadMore(false)
               }
     } catch (error) {
         console.log(error);
