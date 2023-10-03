@@ -23,14 +23,13 @@ export function App() {
     if(!inputValue) return;
     async function fetchImages() {
        setIsLoading(true)
-      //  setImages([])
-      //  setPage(1)
-      
+            
       try {
         const { data } = await pixabayAPI(inputValue, page);
-        console.log(data.totalHits)
+        // console.log(data.totalHits)
 
         setImages((prevImages) => [...prevImages, ...data.hits]);
+      
         setTotalHits(data.totalHits);
 
         if( data.totalHits > perPage){
@@ -52,9 +51,10 @@ export function App() {
     setPage(1);
   }, [inputValue]);
 
-  const handleSearchForm = (inputValue) => {
-    setInputValue(inputValue);
-  };
+    const handleSearchForm = (inputValue) => {
+  setPage(1); 
+  setInputValue(inputValue);
+};
 
   const handleClickBtn = () => {
     setPage((prevPage) => prevPage + 1);
